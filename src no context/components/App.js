@@ -15,11 +15,6 @@ import Timer from "./Timer";
 
 const SECS_PER_QUESTION = 30;
 
-const BASE_URL =
-	process.env.NODE_ENV === "development"
-		? "http://localhost:8000/questions"
-		: process.env.REACT_APP_API_URL;
-
 const initialState = {
 	questions: [],
 
@@ -107,7 +102,7 @@ export default function App() {
 	);
 
 	useEffect(function () {
-		fetch(`${BASE_URL}/questions`)
+		fetch("http://localhost:8000/questions")
 			.then((res) => res.json())
 			.then((data) => dispatch({ type: "dataReceived", payload: data }))
 			.catch((err) => dispatch({ type: "dataFailed" }));
